@@ -1,6 +1,7 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const { exec } = require("child_process");
+const util = require('util');
+const exec = util.promisify(require("child_process").exec);
 const { WebClient } = require('@slack/web-api');
 
 async function run() {
