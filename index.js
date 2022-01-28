@@ -12,3 +12,5 @@ async function run() {
     core.setOutput("result", stdout)
   }))
 }
+
+run()
