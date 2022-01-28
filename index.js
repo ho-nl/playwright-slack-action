@@ -4,10 +4,9 @@ const { exec } = require("child_process");
 const { WebClient } = require('@slack/web-api');
 
 async function run() {
+  const web = new WebClient(core.getInput('slack-token'));
   let testResults = ''
   exec("url=https://www.12gobiking.nl/ prod=1 npx playwright test compare-servers.test.ts", ((error, stdout, stderr) => {
-    const web = new WebClient(core.getInput('slack-token'));
-
     if (error) {
       core.setFailed(error.message)
       console.log(`Error: ${error.message}`)
