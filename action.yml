@@ -1,0 +1,8 @@
+name: 'playwright-slack-action'
+description: 'Generate a detailed slack message for the playwright test result'
+outputs:
+  result:
+    description: 'Result of the playwright command'
+runs:
+  using: 'node16'
+  main: 'index.js'
