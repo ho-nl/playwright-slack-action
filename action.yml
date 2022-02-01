@@ -7,6 +7,12 @@ inputs:
   slack-channel:
     description: Channel where the message will be send
     required: true
+  url:
+    description: url to be tested
+    required: true
+  prod:
+    description: run in production mode
+    required: true
 outputs:
   result:
     description: 'Result of the playwright command'
