@@ -13,8 +13,8 @@ async function run() {
   let warnings = 0
 
   test.stdout.on('data', data => {
-    data = data.toString()
     core.info(data)
+    data = data.toString()
     if (data.includes(`${failedTests + 1})`)) {
       data = data.slice(0, data.search(/\[2m/))
       data = data.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '')
@@ -50,7 +50,7 @@ async function run() {
       }
     } else if(warnings) {
       const message = await web.chat.postMessage({
-        attachments: [{'color': '#cc0000', 'text': `Tests passed with ${warnings} warnings :warning:`, fallback: `Tests passed with ${warnings} warnings :warning:`}],
+        attachments: [{'color': '#ffcc00', 'text': `Tests passed with ${warnings} warnings :warning:`, fallback: `Tests passed with ${warnings} warnings :warning:`}],
         channel: core.getInput('slack-channel'),
       });
       await web.chat.postMessage({
