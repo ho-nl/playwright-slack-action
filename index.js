@@ -6,21 +6,22 @@ const { WebClient } = require('@slack/web-api');
 
 async function run() {
   const web = new WebClient(core.getInput('slack-token'));
-  const {stdout, stderr} = await exec("url=https://www.12gobiking.nl/ prod=1 npx playwright test compare-servers.test.ts")
+  exec("url=https://www.12gobiking.nl/ prod=1 npx playwright test compare-servers.test.ts").then((stdout, stderr) => {
+    if (stderr) {
+      core.setFailed(stderr)
+      web.chat.postMessage({
+        text: stderr,
+        channel: core.getInput('slack-channel'),
+      });
+    } else {
+      web.chat.postMessage({
+        text: stdout,
+        channel: core.getInput('slack-channel'),
+      });
+    }
+    core.setOutput('result', stdout)
+  })
 
-  if (stderr) {
-    core.setFailed(stderr)
-    await web.chat.postMessage({
-      text: stderr,
-      channel: core.getInput('slack-channel'),
-    });
-  } else {
-    await web.chat.postMessage({
-      text: stdout,
-      channel: core.getInput('slack-channel'),
-    });
-  }
-  core.setOutput('result', stdout)
 }
 
 run()
