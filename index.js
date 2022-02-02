@@ -48,6 +48,7 @@ async function run() {
         })
       }
       core.info(output)
+      core.setFailed('Tests failed')
     } else if(warnings) {
       const message = await web.chat.postMessage({
         attachments: [{'color': '#ffcc00', 'text': `Tests passed with ${warnings} warnings :warning:`, fallback: `Tests passed with ${warnings} warnings :warning:`}],
