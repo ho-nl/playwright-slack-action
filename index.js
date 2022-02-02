@@ -28,42 +28,43 @@ async function run() {
 
   test.on('close', async () => {
     if (failedTests) {
-      const message = await web.chat.postMessage({
-        attachments: [{'color': '#cc0000', 'text': `${failedTests} Tests failed :x:`, fallback: `${failedTests} Tests failed :x:`}],
-        channel: core.getInput('slack-channel'),
-      });
-      await web.chat.postMessage({
-        text: failedTestOutput,
-        channel: core.getInput('slack-channel'),
-        thread_ts: message.ts
-      })
-      if (fs.existsSync('./comparison')) {
-        const files = fs.readdirSync('./comparison');
-        files.forEach((filename) => {
-          web.files.upload({
-            file: fs.createReadStream('./comparison/' + filename),
-            channels: core.getInput('slack-channel'),
-            thread_ts: message.ts
-          })
-        })
-        core.setFailed(output)
-      }
+      // const message = await web.chat.postMessage({
+      //   attachments: [{'color': '#cc0000', 'text': `${failedTests} Tests failed :x:`, fallback: `${failedTests} Tests failed :x:`}],
+      //   channel: core.getInput('slack-channel'),
+      // });
+      // await web.chat.postMessage({
+      //   text: failedTestOutput,
+      //   channel: core.getInput('slack-channel'),
+      //   thread_ts: message.ts
+      // })
+      // if (fs.existsSync('./comparison')) {
+      //   const files = fs.readdirSync('./comparison');
+      //   files.forEach((filename) => {
+      //     web.files.upload({
+      //       file: fs.createReadStream('./comparison/' + filename),
+      //       channels: core.getInput('slack-channel'),
+      //       thread_ts: message.ts
+      //     })
+      //   })
+      //
+      // }
+      core.setFailed(output)
     } else if(warnings) {
-      const message = await web.chat.postMessage({
-        attachments: [{'color': '#ffcc00', 'text': `Tests passed with ${warnings} warnings :warning:`, fallback: `Tests passed with ${warnings} warnings :warning:`}],
-        channel: core.getInput('slack-channel'),
-      });
-      await web.chat.postMessage({
-        text: failedTestOutput,
-        channel: core.getInput('slack-channel'),
-        thread_ts: message.ts
-      })
+      // const message = await web.chat.postMessage({
+      //   attachments: [{'color': '#ffcc00', 'text': `Tests passed with ${warnings} warnings :warning:`, fallback: `Tests passed with ${warnings} warnings :warning:`}],
+      //   channel: core.getInput('slack-channel'),
+      // });
+      // await web.chat.postMessage({
+      //   text: failedTestOutput,
+      //   channel: core.getInput('slack-channel'),
+      //   thread_ts: message.ts
+      // })
       core.info(output)
     } else {
-      await web.chat.postMessage({
-        attachments: [{'color': '#36a64f', 'text': 'All tests passed :white_check_mark:', fallback: 'All tests passed :white_check_mark:'}],
-        channel: core.getInput('slack-channel'),
-      });
+      // await web.chat.postMessage({
+      //   attachments: [{'color': '#36a64f', 'text': 'All tests passed :white_check_mark:', fallback: 'All tests passed :white_check_mark:'}],
+      //   channel: core.getInput('slack-channel'),
+      // });
       core.info(output)
     }
   });
