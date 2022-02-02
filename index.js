@@ -13,7 +13,7 @@ async function run() {
   let warnings = 0
 
   test.stdout.on('data', data => {
-    output += data
+    output += data + '\n'
     data = data.toString()
     if (data.includes(`${failedTests + 1})`)) {
       data = data.slice(0, data.search(/[1-9]{1,3} \|/)).trim()
@@ -64,6 +64,8 @@ async function run() {
         attachments: [{'color': '#36a64f', 'text': 'All tests passed :white_check_mark:', fallback: 'All tests passed :white_check_mark:'}],
         channel: core.getInput('slack-channel'),
       });
+      console.log(output)
+      core.info(output)
       core.info(output.toString())
     }
   });
