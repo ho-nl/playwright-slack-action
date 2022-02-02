@@ -1,0 +1,21 @@
+name: 'playwright-slack-action'
+description: 'Generate a detailed slack message for the playwright test results'
+inputs:
+  slack-token:
+    description: Token for the slack bot
+    required: true
+  slack-channel:
+    description: Channel where the message will be send
+    required: true
+  url:
+    description: url to be tested
+    required: true
+  prod:
+    description: run in production mode
+    required: true
+outputs:
+  result:
+    description: 'Result of the playwright command'
+runs:
+  using: 'node12'
+  main: 'index.js'

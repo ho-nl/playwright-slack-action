@@ -1,0 +1,26 @@
+{
+  "name": "playwright-slack-action",
+  "version": "1.0.0",
+  "description": "Runs playwright tests and returns a detailed slack message",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ho-nl/playwright-slack-action.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ho-nl/playwright-slack-action/issues"
+  },
+  "homepage": "https://github.com/ho-nl/playwright-slack-action#readme",
+  "dependencies": {
+    "@actions/core": "^1.6.0",
+    "@actions/github": "^5.0.0",
+    "@slack/web-api": "^6.6.0"
+  },
+  "devDependencies": {}
+}
