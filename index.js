@@ -13,8 +13,8 @@ async function run() {
   let warnings = 0
 
   test.stdout.on('data', data => {
-    output += data + '\n'
     data = data.toString()
+    output += data + '\n'
     if (data.includes(`${failedTests + 1})`)) {
       data = data.slice(0, data.search(/[1-9]{1,3} \|/)).trim()
       data = data.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '')
@@ -46,7 +46,7 @@ async function run() {
             thread_ts: message.ts
           })
         })
-        core.setFailed(output.toString())
+        core.setFailed(output)
       }
     } else if(warnings) {
       const message = await web.chat.postMessage({
@@ -58,15 +58,13 @@ async function run() {
         channel: core.getInput('slack-channel'),
         thread_ts: message.ts
       })
-      core.info(output.toString())
+      core.info(output)
     } else {
       await web.chat.postMessage({
         attachments: [{'color': '#36a64f', 'text': 'All tests passed :white_check_mark:', fallback: 'All tests passed :white_check_mark:'}],
         channel: core.getInput('slack-channel'),
       });
-      console.log(output)
       core.info(output)
-      core.info(output.toString())
     }
   });
 }
