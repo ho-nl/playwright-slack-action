@@ -18,7 +18,7 @@ async function run() {
     if (data.includes(`${failedTests + 1})`)) {
       data = data.slice(0, data.search(/[1-9]{1,3} \|/)).trim()
       data = data.replace(/[\u001b\u009b][[()#;?]*(?:[0-9]{1,4}(?:;[0-9]{0,4})*)?[0-9A-ORZcf-nqry=><]/g, '')
-      failedTestOutput += data + '\n'
+      failedTestOutput += '```' + data + '```' + '\n'
       failedTests++
     } else if (data.includes('Warning:')) {
       failedTestOutput += data + '\n'
